@@ -1,0 +1,42 @@
+<div class="list row">
+  <div class="col-md-6">
+    <h4>Lista de Contas a Pagar</h4>
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let bill of bills; let i = index"
+      [class.active]="i == currentIndex"
+      (click)="setActiveBill(bill, i)">
+        {{ bill.name }}
+      </li>
+    </ul>
+  </div>
+  <div class="col-md-6">
+    <div *ngIf="currentBill">
+      <h4>Conta A Pagar</h4>
+      <div>
+        <label><strong>Nome:</strong></label> {{ currentBill.name }}
+      </div>
+      <div>
+        <label><strong>Valor Original:</strong></label>
+        {{ currentBill.originalValue | currency: 'BRL':'symbol':'2.2'}}
+      </div>
+      <div>
+        <label><strong>Valor Corrigido:</strong></label>
+        {{ currentBill.corretValue | currency: 'BRL':'symbol':'2.2'}}
+      </div>
+      <div>
+        <label><strong>Quantidade de Dias de Atraso:</strong></label>
+        {{ currentBill.delayDays }}
+      </div>
+      <div>
+        <label><strong>Data de Pagamento:</strong></label>
+        {{ currentBill.paymentDate | date: 'dd/MM/yyyy'}}
+      </div>
+
+    </div>
+
+    <div *ngIf="!currentBill">
+      <br />
+      <p>Por Favor Selecione uma Conta...</p>
+    </div>
+  </div>
+</div>
